@@ -45,6 +45,14 @@ class NotificationApi {
       android: android,
       iOS: ios,
     );
+
+// if app closed >>
+
+    final details = await _notification.getNotificationAppLaunchDetails();
+    if (details != null && details.didNotificationLaunchApp) {
+      onNotificationOpen.add(details.payload);
+    }
+
     return await _notification.initialize(
       initializationSettings,
       onSelectNotification: (String? payload) async {

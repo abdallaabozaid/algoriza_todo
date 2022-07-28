@@ -137,10 +137,16 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               );
             },
             (success) {
+              final diffInDays =
+                  state.addedTask.date.date.difference(DateTime.now()).inDays;
+              final daysStatement = diffInDays == 0
+                  ? ''
+                  : "${diffInDays + 1} days uptill the task ";
+
               AppBlocEvents.getAllTasks(context);
               NotificationApi.showNotificaton(
                 title: 'Success !',
-                body: 'Task Scheduled Successfully .',
+                body: 'Task Scheduled Successfully . $daysStatement  ',
               );
               Navigator.pop(context);
             },
