@@ -17,10 +17,11 @@ class LocalTasksRepo extends ITasksRepo {
     required ToDoTask addedTask,
   }) async {
     try {
+      // print(" new one created >> $newTaskId");
       await TasksDatabase.instance.saveTasktoDb(
           task: addedTask.copyWith(
-        id: Random().nextInt(99999),
-      ));
+              // id: newTaskId,
+              ));
 
       return right(unit);
     } catch (e) {

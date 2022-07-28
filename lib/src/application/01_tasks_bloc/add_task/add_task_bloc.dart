@@ -37,12 +37,18 @@ class AddTaskBloc extends Bloc<AddTaskEvent, AddTaskState> {
           addingSuccessOrFailureOption: none(),
         ),
       );
+      final newTaskId = Random().nextInt(99999);
 
-      final suceessOrFailure =
-          await _tasksRepo.addTask(addedTask: state.addedTask);
+      final suceessOrFailure = await _tasksRepo.addTask(
+          addedTask: state.addedTask.copyWith(
+        id: newTaskId,
+      ));
 
       emit(
         state.copyWith(
+          addedTask: state.addedTask.copyWith(
+            id: newTaskId,
+          ),
           isLoading: false,
           addingSuccessOrFailureOption: some(suceessOrFailure),
         ),

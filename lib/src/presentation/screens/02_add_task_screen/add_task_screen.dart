@@ -144,6 +144,13 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                   : "${diffInDays + 1} days uptill the task ";
 
               AppBlocEvents.getAllTasks(context);
+              print(state.addedTask.id);
+              AppBlocEvents.changeTaskCompeletionStatus(
+                context,
+                isCompleted: state.addedTask.compeletionStatus.isCompeleted,
+                taskId: state.addedTask.id,
+              );
+
               NotificationApi.showNotificaton(
                 title: 'Success !',
                 body: 'Task Scheduled Successfully . $daysStatement  ',
